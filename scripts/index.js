@@ -5,12 +5,12 @@ const deleteCard = (cardElement) => {
   cardElement.remove();
 }
 
-const createCard = (initialCards, deleteCard) => {
+const createCard = (cardInfo, deleteCard) => {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
-  cardImage.src = initialCards.link;
-  cardImage.alt = initialCards.name;
-  cardElement.querySelector('.card__title').textContent = initialCards.name;
+  cardImage.src = cardInfo.link;
+  cardImage.alt = cardInfo.name;
+  cardElement.querySelector('.card__title').textContent = cardInfo.name;
 
   const deleteButton = cardElement.querySelector('.card__delete-button');
   deleteButton.addEventListener('click', () => deleteCard(cardElement));
