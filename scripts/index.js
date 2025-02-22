@@ -19,7 +19,6 @@ const createCard = (cardInfo, deleteCard) => {
 } 
 
 initialCards.forEach(function(cardElement) {
-  createCard(cardElement, deleteCard);
   const newCard = createCard(cardElement, deleteCard);
   placesList.append(newCard);
 });
