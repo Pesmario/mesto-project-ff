@@ -40,7 +40,7 @@ const likeButton = document.querySelector('.card__like-button');
 const placesList = document.querySelector('.places__list');
 
 initialCards.forEach(function(cardElement) {
-  const newCard = createCard(cardElement, deleteCard, initialImagePopup, isLiked);
+  const newCard = createCard(cardElement, deleteCard, openImagePopup, isLiked);
   placesList.append(newCard);
 });
 
@@ -53,7 +53,7 @@ const fillProfilePopup = (form, name, description) => {
 };
 
 //функция инициализации попапа с картинкой
-function initialImagePopup(evt) {
+function openImagePopup(evt) {
   popupPictureImage.src = evt.currentTarget.src;
   popupPictureImage.alt = evt.currentTarget.alt;
   popupPictureText.textContent = popupPictureImage.alt;
@@ -81,7 +81,7 @@ function submitAddCard(evt) {
   const cardElement = createCard(
     cardDataObj,
     deleteCard, 
-    initialImagePopup, 
+    openImagePopup, 
     isLiked
   );
   placesList.prepend(cardElement);

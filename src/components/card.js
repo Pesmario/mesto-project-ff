@@ -1,7 +1,7 @@
 const cardTemplate = document.querySelector('#card-template').content;
 
 //функция создания карточки
-const createCard = (cardInfo, deleteCard, initialImagePopup, isLiked) => {
+const createCard = (cardInfo, deleteCard, openImagePopup, isLiked) => {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
   cardImage.src = cardInfo.link;
@@ -15,7 +15,7 @@ const createCard = (cardInfo, deleteCard, initialImagePopup, isLiked) => {
   });
 
   cardImage.addEventListener('click', (evt) => {
-    initialImagePopup(evt);
+    openImagePopup(evt);
   });
 
   likeButton.addEventListener('click', (evt) => {
@@ -32,10 +32,7 @@ const deleteCard = function(cardElement) {
 
 //функция проставки лайка
 function isLiked(evt) {
-  if (evt.currentTarget.classList.contains('card__like-button_is-active')) {
-    evt.currentTarget.classList.remove('card__like-button_is-active')
-  } else 
-  evt.currentTarget.classList.add('card__like-button_is-active');
+  evt.target.classList.toggle('card__like-button_is-active');
 };
 
 export { createCard, deleteCard, isLiked }; 
