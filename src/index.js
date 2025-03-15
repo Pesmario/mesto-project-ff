@@ -1,4 +1,8 @@
-/*import { openModal, closeModal, closeModalOnEscape } from './components/modal.js'; */
+
+import './pages/index.css';
+import { initialCards } from './components/cards.js';
+import { openModal, closeModal, closeModalOnEscape } from './components/modal.js'; 
+import { createCard, deleteCard, isLiked } from './components/card.js'; 
 
 // находим все попапы
 const popupAll = document.querySelectorAll(".popup");
@@ -31,67 +35,18 @@ const popupPictureText = document.querySelector('.popup__caption');
 // переменные лайка
 const likeButton = document.querySelector('.card__like-button');
 
-// старое задание добавления карточек:
+// получаем темплейт карточки
 
 const placesList = document.querySelector('.places__list');
-const cardTemplate = document.querySelector('#card-template').content;
-
-const deleteCard = function(cardElement) {
-  cardElement.remove();
-}
-
-const createCard = (cardInfo, deleteCard, initialImagePopup, isLiked) => {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardImage = cardElement.querySelector('.card__image');
-  cardImage.src = cardInfo.link;
-  cardImage.alt = cardInfo.name;
-  cardElement.querySelector('.card__title').textContent = cardInfo.name;
-  const likeButton = cardElement.querySelector('.card__like-button');
-
-  const deleteButton = cardElement.querySelector('.card__delete-button');
-  deleteButton.addEventListener('click', function() {
-    deleteCard(cardElement);
-  });
-
-  cardImage.addEventListener('click', (evt) => {
-    initialImagePopup(evt);
-  });
-
-  likeButton.addEventListener('click', (evt) => {
-    isLiked(evt);
-  });
-
-  return cardElement;
-}
 
 initialCards.forEach(function(cardElement) {
   const newCard = createCard(cardElement, deleteCard, initialImagePopup, isLiked);
   placesList.append(newCard);
 });
 
-//modal
+// functions
 
-const openModal = (element) => {
-  element.classList.add("popup_is-opened");
-  document.addEventListener("keydown", closeModalOnEscape);
-};
-
-const closeModal = (element) => {
-  element.classList.remove("popup_is-opened");
-  document.removeEventListener("keydown", closeModalOnEscape);
-};
-
-const closeModalOnEscape = (evt) => {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_is-opened");
-    closeModal(openedPopup);
-  }
-};
-
-// конец modal
-
-//declared functions
-
+// функция заполнения попапа редактирования профиля
 const fillProfilePopup = (form, name, description) => {
   form.elements.name.value = name;
   form.elements.description.value = description;
@@ -103,14 +58,6 @@ function initialImagePopup(evt) {
   popupPictureImage.alt = evt.currentTarget.alt;
   popupPictureText.textContent = popupPictureImage.alt;
   openModal(popupPicture);
-};
-
-//функция проставки лайка
-function isLiked(evt) {
-  if (evt.currentTarget.classList.contains('card__like-button_is-active')) {
-    evt.currentTarget.classList.remove('card__like-button_is-active')
-  } else 
-  evt.currentTarget.classList.add('card__like-button_is-active');
 };
 
 // функция заполения профиля новыми данными после submit
