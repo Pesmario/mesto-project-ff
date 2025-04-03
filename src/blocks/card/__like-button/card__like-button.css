@@ -1,3 +1,11 @@
+.card__like {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	row-gap: 3px;
+}
+
 .card__like-button {
   width: 21px;
   height: 18px;
