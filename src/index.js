@@ -82,7 +82,7 @@ function openImagePopup(imageSrc, caption) {
 
 // функция заполения профиля новыми данными после submit
 
-function handleFormSubmit(evt) {
+function handleProfilFormSubmit(evt) {
   evt.preventDefault();
   renderLoading(true, popupProfileForm);
   const nameValue = nameInput.value;
@@ -111,7 +111,8 @@ function submitAddCard(evt) {
   addNewCardApi(cardDataObj.name, cardDataObj.link)
     .then(card =>  {
       const newCard = createCard(card._id, 
-        cardDataObj, 
+        cardDataObj.name, 
+        cardDataObj.link,
         deleteCard, 
         card.likes, 
         setLikeToCard, 
@@ -213,7 +214,7 @@ newCardButton.addEventListener("click", () => {
 });
 
 // обработчик submit на редактирование профиля
-popupProfileForm.addEventListener('submit', handleFormSubmit); 
+popupProfileForm.addEventListener('submit', handleProfilFormSubmit); 
 
 // обрабочик submit добавления карточки
 popupNewCardForm.addEventListener('submit', submitAddCard);
